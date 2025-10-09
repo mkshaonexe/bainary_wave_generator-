@@ -1,0 +1,49 @@
+# Build and distribution folders
+build/
+dist/
+*.spec
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Batch files and helper scripts (keep source, ignore helpers)
+BUILD_EXE.bat
+RUN_ME.bat
+
+# Documentation files (too many guides)
+DISTRIBUTION_GUIDE.txt
+FOR_USERS.txt
+INSTALL_INSTRUCTIONS.txt
+QUICK_START.txt
+RELEASE_CHECKLIST.txt
+START_HERE.txt
+CREATE_RELEASE_v0.0.2.txt
+HOW_TO_CREATE_GITHUB_RELEASE.txt
+*_READY_FOR_RELEASE.txt
+*_DOWNLOAD_AND_SHARE_THIS.txt
+*_GITHUB_UPDATE_COMPLETE.txt
+README_EXE.md
+RELEASE_NOTES_*.md
+
+# Build scripts (keep only for local development)
+build_exe.py
+

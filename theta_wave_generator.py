@@ -18,6 +18,7 @@ class ThetaWaveGenerator:
         self.is_playing = False
         self.stream = None
         self.audio_thread = None
+        self.audio_position = 0  # For phase continuity in continuous playback
         
         # Configure style
         self.setup_styles()
@@ -334,12 +335,43 @@ class ThetaWaveGenerator:
     def _playback_loop(self):
         """Continuous audio playback loop"""
         try:
-            # Generate audio in chunks for continuous playback
-            chunk_duration = 2.0  # 2 seconds per chunk
+            # Use a callback-based stream for truly continuous playback
+            def audio_callback(outdata, frames, time_info, status):
+                if status:
+                    print(f'Status: {status}')
+                
+                # Generate audio on-the-fly
+                base_freq = self.base_freq_var.get()
+                theta_freq = self.theta_freq_var.get()
+                volume = self.volume_var.get()
+                
+                # Calculate frequencies
+                left_freq = base_freq
+                right_freq = base_freq + theta_freq
+                
+                # Generate sine waves for this chunk
+                t = np.arange(frames) / self.sample_rate + self.audio_position
+                left_channel = volume * np.sin(2 * np.pi * left_freq * t)
+                right_channel = volume * np.sin(2 * np.pi * right_freq * t)
+                
+                # Update position for next chunk (to maintain phase continuity)
+                self.audio_position += frames / self.sample_rate
+                
+                # Fill output buffer
+                outdata[:, 0] = left_channel
+                outdata[:, 1] = right_channel
             
-            while self.is_playing:
-                audio_chunk = self.generate_binaural_beat(chunk_duration)
-                sd.play(audio_chunk, self.sample_rate, blocking=True)
+            # Reset audio position for phase continuity
+            self.audio_position = 0
+            
+            # Create and start the stream
+            with sd.OutputStream(channels=2, 
+                                callback=audio_callback,
+                                samplerate=self.sample_rate,
+                                blocksize=2048):  # Smaller blocksize for lower latency
+                # Keep stream running while playing
+                while self.is_playing:
+                    sd.sleep(100)  # Sleep in small intervals to check status
                 
         except Exception as e:
             self.root.after(0, lambda: messagebox.showerror("Playback Error", str(e)))

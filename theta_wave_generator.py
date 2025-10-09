@@ -76,7 +76,7 @@ class ThetaWaveGenerator:
         # Preset buttons
         btn_config = {'font': ('Arial', 11, 'bold'), 'width': 18, 'height': 3, 'relief': 'raised', 'bd': 3}
         
-        calm_mind_btn = tk.Button(presets_frame, text="🧠 Stop Overthinking\nCalm Mind\n(7.83 Hz)", 
+        calm_mind_btn = tk.Button(presets_frame, text="🧠 Stop Overthinking\nCalm Mind\n(852 Hz)", 
                                    bg='#9b59b6', fg='white',
                                    command=lambda: self.apply_preset('calm_mind'),
                                    **btn_config)
@@ -209,12 +209,12 @@ class ThetaWaveGenerator:
         presets = {
             'calm_mind': {
                 'base_freq': 200.0,
-                'theta_freq': 7.83,
+                'theta_freq': 852.0,
                 'volume': 0.3,
                 'duration': 20.0,
                 'name': '🧠 Stop Overthinking / Calm Mind',
                 'color': '#9b59b6',
-                'description': 'Schumann Resonance - 7.83 Hz'
+                'description': 'Solfeggio Frequency - 852 Hz'
             },
             'focus': {
                 'base_freq': 200.0,

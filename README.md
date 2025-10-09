@@ -10,7 +10,7 @@ A powerful desktop application for generating scientifically-tuned binaural beat
 
 - **🎵 Continuous Playback**: Smooth, uninterrupted audio streaming
 - **⚡ Three Scientific Presets**: 
-  - 🧠 **Stop Overthinking / Calm Mind** (7.83 Hz) - Schumann Resonance, Earth's natural frequency
+  - 🧠 **Stop Overthinking / Calm Mind** (852 Hz) - Solfeggio frequency for awakening intuition
   - 📚 **Focus / Study / Learning** (14-20 Hz Beta) - Improves attention and working memory
   - 😴 **Deep Sleep / Healing** (1-3 Hz Delta) - Mimics slow-wave sleep, helps with insomnia
 - **💾 Export to WAV**: Save custom binaural beats for any duration
@@ -43,13 +43,14 @@ python theta_wave_generator.py
 
 That's it! 🎉
 
-## 🧠 What are the Different Brainwave Frequencies?
+## 🧠 What are the Different Frequencies?
 
-### 🧠 Schumann Resonance (7.83 Hz)
-- **Earth's natural electromagnetic frequency**
-- Stops overthinking and calms the mind
-- Promotes natural, grounded mental state
-- Helps reduce anxiety and stress
+### 🧠 Solfeggio Frequency (852 Hz)
+- **Ancient sacred frequency**
+- Awakens intuition and inner strength
+- Helps clear overthinking and mental clutter
+- Returns to spiritual order and clarity
+- Promotes calm, peaceful mental state
 
 ### 📚 Beta Waves (14-20 Hz)
 - **Active concentration and focus**
@@ -81,7 +82,7 @@ Your brain perceives the difference (6 Hz in this example) as a rhythmic beat, w
 
 ## ⚙️ Recommended Settings
 
-- **For Calm Mind**: 7.83 Hz (Schumann Resonance)
+- **For Calm Mind**: 852 Hz (Solfeggio Frequency)
 - **For Focus/Study**: 15 Hz (Beta waves, 14-20 Hz range)
 - **For Deep Sleep**: 2 Hz (Delta waves, 1-3 Hz range)
 - **Base Frequency**: 200 Hz (most comfortable for most people)
@@ -107,7 +108,7 @@ Your brain perceives the difference (6 Hz in this example) as a rhythmic beat, w
 
 ### v0.0.3 (Latest)
 - ✅ **Updated to 3 scientifically-tuned presets**
-- ✅ Added Schumann Resonance (7.83 Hz) for calm mind
+- ✅ Added Solfeggio Frequency (852 Hz) for stopping overthinking and calm mind
 - ✅ Added Beta waves (15 Hz) for focus and learning
 - ✅ Added Delta waves (2 Hz) for deep sleep and healing
 - ✅ Renamed from "Theta Wave" to "Brainwave" Generator

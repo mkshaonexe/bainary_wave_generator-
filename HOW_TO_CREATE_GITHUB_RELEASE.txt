@@ -1,0 +1,124 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║         HOW TO CREATE A GITHUB RELEASE                       ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+
+🎯 MAKE YOUR EXE DOWNLOADABLE ON GITHUB
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Follow these simple steps to create a release on GitHub:
+
+
+📝 STEP-BY-STEP GUIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Go to your repository:
+   https://github.com/mkshaonexe/bainary_wave_generator-
+
+2. Click on "Releases" (right side of the page)
+   Or go directly to:
+   https://github.com/mkshaonexe/bainary_wave_generator-/releases
+
+3. Click the "Create a new release" button (or "Draft a new release")
+
+4. Fill in the release form:
+
+   TAG VERSION:
+   ┌────────────────────────────────────────┐
+   │ v1.0.0                                 │
+   └────────────────────────────────────────┘
+   (Click "Create new tag: v1.0.0 on publish")
+
+   RELEASE TITLE:
+   ┌────────────────────────────────────────┐
+   │ Theta Wave Generator v1.0 - Production │
+   └────────────────────────────────────────┘
+
+   DESCRIPTION:
+   Copy and paste from: RELEASE_NOTES_v1.0.md
+   (Or write your own description)
+
+5. UPLOAD THE EXECUTABLE:
+   
+   Scroll down to "Attach binaries by dropping them here"
+   
+   Drag and drop this file:
+   📁 dist\ThetaWaveGenerator.exe
+   
+   Or click "choose your files" and select it
+
+6. OPTIONS:
+   ☐ Set as a pre-release (leave unchecked)
+   ☐ Set as the latest release (CHECK THIS!)
+
+7. Click "Publish release"
+
+
+✅ DONE! YOUR RELEASE IS LIVE!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Users can now download ThetaWaveGenerator.exe from:
+https://github.com/mkshaonexe/bainary_wave_generator-/releases
+
+
+📤 SHARE THE DOWNLOAD LINK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Direct download link will be:
+https://github.com/mkshaonexe/bainary_wave_generator-/releases/download/v1.0.0/ThetaWaveGenerator.exe
+
+Release page:
+https://github.com/mkshaonexe/bainary_wave_generator-/releases/latest
+
+
+💡 UPDATING THE README
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+After creating the release, update the README.md to include:
+
+"Download the latest version: 
+[ThetaWaveGenerator.exe](https://github.com/mkshaonexe/bainary_wave_generator-/releases/latest)"
+
+
+🔄 CREATING FUTURE RELEASES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When you update the app:
+1. Rebuild exe: run BUILD_EXE.bat
+2. Commit and push changes
+3. Create new release with version v1.1.0, v1.2.0, etc.
+4. Upload new ThetaWaveGenerator.exe
+
+
+📊 RELEASE STATISTICS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GitHub will show you:
+- Download count
+- Release date
+- File size
+- Asset downloads
+
+This helps you track how many people are using your app!
+
+
+🎉 CONGRATULATIONS!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your app is now publicly available for download!
+
+Share the release link with anyone who wants to:
+- Reduce overthinking
+- Improve meditation
+- Enhance sleep
+- Boost creativity
+
+═══════════════════════════════════════════════════════════════
+
+Next step: Create the release now!
+Go to: https://github.com/mkshaonexe/bainary_wave_generator-/releases/new
+
+═══════════════════════════════════════════════════════════════
+

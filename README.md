@@ -1,19 +1,18 @@
-# 🧠 Theta Wave Binaural Beat Generator
+# 🧠 Brainwave Binaural Beat Generator
 
 [![Download](https://img.shields.io/badge/Download-Latest%20Release-brightgreen)](https://github.com/mkshaonexe/bainary_wave_generator-/releases/latest)
-[![Version](https://img.shields.io/badge/version-0.0.2-blue)](https://github.com/mkshaonexe/bainary_wave_generator-/releases)
+[![Version](https://img.shields.io/badge/version-0.0.3-blue)](https://github.com/mkshaonexe/bainary_wave_generator-/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)](https://github.com/mkshaonexe/bainary_wave_generator-)
 
-A powerful desktop application for generating theta wave binaural beats to help reduce overthinking, promote deep relaxation, and enhance meditation.
+A powerful desktop application for generating scientifically-tuned binaural beats to enhance your mental state - whether you need focus, calm, or deep sleep.
 
 ## ✨ Features
 
 - **🎵 Continuous Playback**: Smooth, uninterrupted audio streaming
-- **⚡ One-Click Presets**: 
-  - 🧘 Meditation (6 Hz) - Reduce overthinking
-  - 😴 Sleep (5 Hz) - Fall asleep faster
-  - 💡 Creativity (7 Hz) - Boost creative thinking
-  - 🌊 Deep Relax (4.5 Hz) - Maximum relaxation
+- **⚡ Three Scientific Presets**: 
+  - 🧠 **Stop Overthinking / Calm Mind** (7.83 Hz) - Schumann Resonance, Earth's natural frequency
+  - 📚 **Focus / Study / Learning** (14-20 Hz Beta) - Improves attention and working memory
+  - 😴 **Deep Sleep / Healing** (1-3 Hz Delta) - Mimics slow-wave sleep, helps with insomnia
 - **💾 Export to WAV**: Save custom binaural beats for any duration
 - **🎨 Beautiful GUI**: Modern, intuitive interface
 - **🔧 Advanced Controls**: Customizable frequencies and settings
@@ -44,14 +43,25 @@ python theta_wave_generator.py
 
 That's it! 🎉
 
-## 🧘 What are Theta Waves?
+## 🧠 What are the Different Brainwave Frequencies?
 
-Theta waves (4-8 Hz) are brain waves associated with:
-- Deep relaxation and meditation
-- Reduced mental chatter and overthinking
-- Enhanced creativity and intuition
-- Improved sleep quality
-- Access to subconscious mind
+### 🧠 Schumann Resonance (7.83 Hz)
+- **Earth's natural electromagnetic frequency**
+- Stops overthinking and calms the mind
+- Promotes natural, grounded mental state
+- Helps reduce anxiety and stress
+
+### 📚 Beta Waves (14-20 Hz)
+- **Active concentration and focus**
+- Improves attention and working memory
+- Enhances learning and cognitive performance
+- Perfect for study and work sessions
+
+### 😴 Delta Waves (1-3 Hz)
+- **Deep sleep and healing**
+- Mimics slow-wave sleep patterns
+- Helps with insomnia and sleep disorders
+- Promotes physical healing and recovery
 
 ## 🔊 How Binaural Beats Work
 
@@ -71,10 +81,10 @@ Your brain perceives the difference (6 Hz in this example) as a rhythmic beat, w
 
 ## ⚙️ Recommended Settings
 
-- **For Meditation**: Theta frequency 5-7 Hz
-- **For Sleep**: Theta frequency 4-6 Hz
-- **For Creativity**: Theta frequency 6-8 Hz
-- **Base Frequency**: 200-250 Hz (most comfortable for most people)
+- **For Calm Mind**: 7.83 Hz (Schumann Resonance)
+- **For Focus/Study**: 15 Hz (Beta waves, 14-20 Hz range)
+- **For Deep Sleep**: 2 Hz (Delta waves, 1-3 Hz range)
+- **Base Frequency**: 200 Hz (most comfortable for most people)
 - **Volume**: 20-40% (should be gentle and non-intrusive)
 
 ## ⚠️ Safety Notes
@@ -95,11 +105,17 @@ Your brain perceives the difference (6 Hz in this example) as a rhythmic beat, w
 
 ## 📋 Changelog
 
-### v0.0.2 (Latest)
-- ✅ **Fixed continuous playback** - Eliminated 2-second loop gaps
+### v0.0.3 (Latest)
+- ✅ **Updated to 3 scientifically-tuned presets**
+- ✅ Added Schumann Resonance (7.83 Hz) for calm mind
+- ✅ Added Beta waves (15 Hz) for focus and learning
+- ✅ Added Delta waves (2 Hz) for deep sleep and healing
+- ✅ Renamed from "Theta Wave" to "Brainwave" Generator
+
+### v0.0.2
+- ✅ Fixed continuous playback - Eliminated 2-second loop gaps
 - ✅ Implemented stream-based audio for seamless playback
 - ✅ Added phase continuity for smooth sine wave generation
-- ✅ Improved user experience for meditation and relaxation
 
 ### v0.0.1
 - Initial release with one-click presets

@@ -9,8 +9,8 @@ import time
 class ThetaWaveGenerator:
     def __init__(self, root):
         self.root = root
-        self.root.title("Theta Wave Binaural Beat Generator")
-        self.root.geometry("700x550")
+        self.root.title("Brainwave Binaural Beat Generator")
+        self.root.geometry("750x550")
         self.root.resizable(False, False)
         
         # Audio parameters
@@ -26,8 +26,8 @@ class ThetaWaveGenerator:
         # Create GUI
         self.create_widgets()
         
-        # Load default meditation preset
-        self.apply_preset('meditation')
+        # Load default calm mind preset
+        self.apply_preset('calm_mind')
         
     def setup_styles(self):
         """Setup custom styles for the GUI"""
@@ -47,11 +47,11 @@ class ThetaWaveGenerator:
         header_frame.pack(fill='x', pady=(0, 20))
         header_frame.pack_propagate(False)
         
-        title_label = tk.Label(header_frame, text="🧠 Theta Wave Binaural Beat Generator",
+        title_label = tk.Label(header_frame, text="🧠 Brainwave Binaural Beat Generator",
                                font=('Arial', 18, 'bold'), bg='#3498db', fg='white')
-        title_label.pack(pady=20)
+        title_label.pack(pady=15)
         
-        subtitle_label = tk.Label(header_frame, text="Reduce overthinking and promote relaxation",
+        subtitle_label = tk.Label(header_frame, text="Calm Mind • Focus & Study • Deep Sleep",
                                  font=('Arial', 10), bg='#3498db', fg='#ecf0f1')
         subtitle_label.pack()
         
@@ -74,31 +74,25 @@ class ThetaWaveGenerator:
         presets_frame.pack()
         
         # Preset buttons
-        btn_config = {'font': ('Arial', 11, 'bold'), 'width': 15, 'height': 2, 'relief': 'raised', 'bd': 3}
+        btn_config = {'font': ('Arial', 11, 'bold'), 'width': 18, 'height': 3, 'relief': 'raised', 'bd': 3}
         
-        meditation_btn = tk.Button(presets_frame, text="🧘 Meditation\n(6 Hz)", 
+        calm_mind_btn = tk.Button(presets_frame, text="🧠 Stop Overthinking\nCalm Mind\n(7.83 Hz)", 
                                    bg='#9b59b6', fg='white',
-                                   command=lambda: self.apply_preset('meditation'),
+                                   command=lambda: self.apply_preset('calm_mind'),
                                    **btn_config)
-        meditation_btn.grid(row=0, column=0, padx=8, pady=5)
+        calm_mind_btn.grid(row=0, column=0, padx=10, pady=5)
         
-        sleep_btn = tk.Button(presets_frame, text="😴 Sleep\n(5 Hz)",
-                             bg='#34495e', fg='white',
-                             command=lambda: self.apply_preset('sleep'),
+        focus_btn = tk.Button(presets_frame, text="📚 Focus & Study\nLearning\n(Beta 15 Hz)",
+                             bg='#3498db', fg='white',
+                             command=lambda: self.apply_preset('focus'),
                              **btn_config)
-        sleep_btn.grid(row=0, column=1, padx=8, pady=5)
+        focus_btn.grid(row=0, column=1, padx=10, pady=5)
         
-        creativity_btn = tk.Button(presets_frame, text="💡 Creativity\n(7 Hz)",
-                                  bg='#e67e22', fg='white',
-                                  command=lambda: self.apply_preset('creativity'),
+        deep_sleep_btn = tk.Button(presets_frame, text="😴 Deep Sleep\nHealing\n(Delta 2 Hz)",
+                                  bg='#2c3e50', fg='white',
+                                  command=lambda: self.apply_preset('deep_sleep'),
                                   **btn_config)
-        creativity_btn.grid(row=0, column=2, padx=8, pady=5)
-        
-        relaxation_btn = tk.Button(presets_frame, text="🌊 Deep Relax\n(4.5 Hz)",
-                                   bg='#16a085', fg='white',
-                                   command=lambda: self.apply_preset('relaxation'),
-                                   **btn_config)
-        relaxation_btn.grid(row=0, column=3, padx=8, pady=5)
+        deep_sleep_btn.grid(row=0, column=2, padx=10, pady=5)
         
         self.preset_status = tk.Label(quick_start_frame, text="👆 Select a preset above to get started",
                                      font=('Arial', 10, 'bold'), bg='#f8f9fa', fg='#7f8c8d')
@@ -213,37 +207,32 @@ class ThetaWaveGenerator:
     def apply_preset(self, preset_type):
         """Apply a preset configuration"""
         presets = {
-            'meditation': {
+            'calm_mind': {
                 'base_freq': 200.0,
-                'theta_freq': 6.0,
-                'volume': 0.3,
-                'duration': 15.0,
-                'name': '🧘 Meditation',
-                'color': '#9b59b6'
-            },
-            'sleep': {
-                'base_freq': 200.0,
-                'theta_freq': 5.0,
-                'volume': 0.25,
-                'duration': 30.0,
-                'name': '😴 Sleep',
-                'color': '#34495e'
-            },
-            'creativity': {
-                'base_freq': 220.0,
-                'theta_freq': 7.0,
+                'theta_freq': 7.83,
                 'volume': 0.3,
                 'duration': 20.0,
-                'name': '💡 Creativity',
-                'color': '#e67e22'
+                'name': '🧠 Stop Overthinking / Calm Mind',
+                'color': '#9b59b6',
+                'description': 'Schumann Resonance - 7.83 Hz'
             },
-            'relaxation': {
-                'base_freq': 180.0,
-                'theta_freq': 4.5,
+            'focus': {
+                'base_freq': 200.0,
+                'theta_freq': 15.0,
+                'volume': 0.3,
+                'duration': 30.0,
+                'name': '📚 Focus / Study / Learning',
+                'color': '#3498db',
+                'description': 'Beta Waves - 15 Hz (14-20 Hz range)'
+            },
+            'deep_sleep': {
+                'base_freq': 200.0,
+                'theta_freq': 2.0,
                 'volume': 0.25,
-                'duration': 25.0,
-                'name': '🌊 Deep Relaxation',
-                'color': '#16a085'
+                'duration': 60.0,
+                'name': '😴 Deep Sleep / Healing',
+                'color': '#2c3e50',
+                'description': 'Delta Waves - 2 Hz (1-3 Hz range)'
             }
         }
         

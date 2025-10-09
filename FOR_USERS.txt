@@ -1,0 +1,105 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║      🧠 THETA WAVE BINAURAL BEAT GENERATOR 🧠                ║
+║                                                               ║
+║              NO INSTALLATION REQUIRED!                       ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+
+🎯 SUPER SIMPLE - JUST 3 STEPS!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1️⃣  DOWNLOAD
+   Download ThetaWaveGenerator.exe to your computer
+
+2️⃣  DOUBLE-CLICK
+   Double-click the .exe file to open the app
+   (No installation needed!)
+
+3️⃣  CLICK AND RELAX
+   • Choose a preset button
+   • Click the green PLAY button
+   • Put on headphones
+   • Enjoy! 🎧
+
+
+🎨 CHOOSE YOUR GOAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🧘 MEDITATION (6 Hz)
+   Perfect for daily meditation practice
+   Reduces overthinking and mental chatter
+
+😴 SLEEP (5 Hz)  
+   Helps you fall asleep faster
+   Promotes deep, restful sleep
+
+💡 CREATIVITY (7 Hz)
+   Boosts creative thinking
+   Great for brainstorming and problem-solving
+
+🌊 DEEP RELAX (4.5 Hz)
+   Maximum relaxation effect
+   Ideal for stress relief and anxiety reduction
+
+
+⚠️ FIRST-TIME SETUP (Windows Security)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+When you first run the app, Windows might show a warning:
+"Windows protected your PC"
+
+This is normal for new apps! To run:
+   1. Click "More info"
+   2. Click "Run anyway"
+
+This is safe - it's just because the app isn't digitally signed.
+
+
+📌 IMPORTANT TIPS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✓ ALWAYS use headphones (required for binaural beats!)
+✓ Keep volume comfortable (20-40%)
+✓ Find a quiet place
+✓ Don't use while driving or operating machinery
+✓ Start with 5-15 minute sessions
+
+
+❓ TROUBLESHOOTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problem: App won't open
+   → Try running as Administrator (right-click → Run as admin)
+
+Problem: No sound
+   → Check headphones are plugged in
+   → Check Windows volume settings
+   → Try adjusting volume slider in the app
+
+Problem: Antivirus blocks it
+   → Add ThetaWaveGenerator.exe to your antivirus exceptions
+   → The app is safe - this is a false positive
+
+
+💡 ADVANCED FEATURES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Want to customize settings?
+   → Click "Show Advanced Settings" in the app
+   → Adjust frequencies manually
+   → Export custom audio files for offline use
+
+
+🌟 ENJOY YOUR RELAXATION!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+That's it! No Python, no installation, no hassle.
+Just download, click, and relax! 🧘‍♂️✨
+
+
+System Requirements: Windows 7 or later
+File Size: ~28 MB
+No Internet Required: Works completely offline
+

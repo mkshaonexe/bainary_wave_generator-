@@ -1,0 +1,66 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║           INSTALLATION INSTRUCTIONS                          ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+
+If the RUN_ME.bat file doesn't work, follow these steps:
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+STEP 1: Open Command Prompt or PowerShell
+   - Press Windows Key + R
+   - Type: cmd
+   - Press Enter
+
+STEP 2: Navigate to this folder
+   - Type: cd "E:\Cursor Play ground\Thata wave"
+   - Press Enter
+
+STEP 3: Install Required Packages
+   - Copy and paste this command:
+   
+     pip install numpy sounddevice
+   
+   - Press Enter and wait for installation to complete
+
+STEP 4: Run the Application
+   - Type: python theta_wave_generator.py
+   - Press Enter
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+TROUBLESHOOTING:
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Problem: "pip is not recognized"
+Solution: Make sure Python is installed and added to PATH
+         Download from: https://www.python.org/downloads/
+
+Problem: "python is not recognized"  
+Solution: Try using "py" instead of "python"
+         Example: py theta_wave_generator.py
+
+Problem: Packages won't install
+Solution: Try upgrading pip first:
+         pip install --upgrade pip
+         Then try installing packages again
+
+Problem: Permission errors
+Solution: Run Command Prompt as Administrator
+         Right-click cmd.exe → "Run as administrator"
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+✅ PACKAGES NOW INSTALLED!
+
+Just run: python theta_wave_generator.py
+
+Or double-click: RUN_ME.bat
+
+
+Enjoy! 🧠✨
+

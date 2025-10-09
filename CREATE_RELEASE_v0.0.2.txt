@@ -1,0 +1,134 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                                                               ║
+║         HOW TO CREATE GITHUB RELEASE v0.0.2                  ║
+║                                                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+
+🎯 CREATE THE v0.0.2 RELEASE ON GITHUB
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Follow these steps to publish your updated executable:
+
+
+📝 STEP-BY-STEP GUIDE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. Go to your repository releases page:
+   https://github.com/mkshaonexe/bainary_wave_generator-/releases/new
+
+2. Fill in the release form:
+
+   TAG VERSION:
+   ┌────────────────────────────────────────┐
+   │ v0.0.2                                 │
+   └────────────────────────────────────────┘
+   (Click "Create new tag: v0.0.2 on publish")
+
+   RELEASE TITLE:
+   ┌────────────────────────────────────────────────────────────┐
+   │ v0.0.2 - Continuous Playback Fix (No More Loop Gaps!)     │
+   └────────────────────────────────────────────────────────────┘
+
+   DESCRIPTION:
+   Copy and paste from: RELEASE_NOTES_v0.0.2.md
+   (Or use the summary below)
+
+3. UPLOAD THE EXECUTABLE:
+   
+   Scroll down to "Attach binaries by dropping them here"
+   
+   Drag and drop this file:
+   📁 dist\ThetaWaveGenerator.exe
+   
+   Or click "choose your files" and select it
+
+4. OPTIONS:
+   ☐ Set as a pre-release (leave unchecked)
+   ☑ Set as the latest release (CHECK THIS!)
+
+5. Click "Publish release"
+
+
+📄 QUICK DESCRIPTION (If you don't want to copy the full release notes)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+## 🎵 Major Fix: Continuous Playback
+
+**No more uncomfortable 2-second loop gaps!**
+
+This release completely eliminates the audio interruptions that occurred every 
+2 seconds during playback. Now you get smooth, continuous binaural beats 
+perfect for meditation and relaxation.
+
+### What's Fixed
+✅ Smooth, uninterrupted audio streaming
+✅ No gaps or pauses in playback
+✅ Perfect for meditation and deep relaxation
+✅ Stream-based audio with phase continuity
+
+### One-Click Presets
+- 🧘 Meditation (6 Hz) - Reduce overthinking
+- 😴 Sleep (5 Hz) - Fall asleep faster
+- 💡 Creativity (7 Hz) - Boost creative thinking
+- 🌊 Deep Relax (4.5 Hz) - Maximum relaxation
+
+### How to Use
+1. Download ThetaWaveGenerator.exe below
+2. Double-click to run (no installation!)
+3. Choose a preset and click PLAY
+4. Put on headphones and enjoy! 🎧
+
+**Windows security warning?** Click "More info" → "Run anyway"
+
+**System Requirements:**
+- Windows 7 or later (64-bit)
+- Headphones (required for binaural effect)
+- No internet required (works offline)
+
+---
+
+**Download the .exe from Assets below!**
+
+
+✅ DONE! YOUR RELEASE IS LIVE!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+After publishing, users can download from:
+https://github.com/mkshaonexe/bainary_wave_generator-/releases/latest
+
+
+📤 SHARE THE DOWNLOAD LINK
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Direct download link will be:
+https://github.com/mkshaonexe/bainary_wave_generator-/releases/download/v0.0.2/ThetaWaveGenerator.exe
+
+Release page:
+https://github.com/mkshaonexe/bainary_wave_generator-/releases/tag/v0.0.2
+
+Latest release (always up to date):
+https://github.com/mkshaonexe/bainary_wave_generator-/releases/latest
+
+
+🎉 CONGRATULATIONS!
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Your improved theta wave generator is ready to share!
+
+The continuous playback fix makes it perfect for:
+✓ Long meditation sessions
+✓ Falling asleep
+✓ Extended relaxation periods
+✓ Creative work sessions
+
+No more annoying gaps interrupting your peace! 🧘‍♂️✨
+
+
+═══════════════════════════════════════════════════════════════
+
+NEXT STEP: Create the release now!
+Go to: https://github.com/mkshaonexe/bainary_wave_generator-/releases/new
+
+═══════════════════════════════════════════════════════════════
+

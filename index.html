@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADHD Focus Generator - Binaural Beats</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="wave wave1"></div>
+        <div class="wave wave2"></div>
+        <div class="wave wave3"></div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="brain-icon">🧠</span>
+                <h1>ADHD Focus Generator</h1>
+            </div>
+            <p class="subtitle">Binaural Beats for Enhanced Focus & Concentration</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Quick Start Card -->
+            <div class="card quick-start-card">
+                <h2 class="card-title">⚡ Quick Start</h2>
+                <p class="card-description">Choose a preset or customize your frequencies below</p>
+                
+                <div class="preset-buttons">
+                    <button class="preset-btn active" data-left="850" data-right="850">
+                        <span class="preset-icon">🧠</span>
+                        <span class="preset-name">ADHD Focus</span>
+                        <span class="preset-freq">850 Hz</span>
+                    </button>
+                    <button class="preset-btn" data-left="200" data-right="206">
+                        <span class="preset-icon">🎯</span>
+                        <span class="preset-name">Deep Focus</span>
+                        <span class="preset-freq">6 Hz Beat</span>
+                    </button>
+                    <button class="preset-btn" data-left="200" data-right="210">
+                        <span class="preset-icon">✨</span>
+                        <span class="preset-name">Alpha Waves</span>
+                        <span class="preset-freq">10 Hz Beat</span>
+                    </button>
+                    <button class="preset-btn" data-left="200" data-right="215">
+                        <span class="preset-icon">⚡</span>
+                        <span class="preset-name">Beta Waves</span>
+                        <span class="preset-freq">15 Hz Beat</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Frequency Controls Card -->
+            <div class="card frequency-card">
+                <h2 class="card-title">🎵 Frequency Controls</h2>
+                <p class="card-description">Adjust left and right ear frequencies independently</p>
+                
+                <div class="frequency-controls">
+                    <!-- Left Ear -->
+                    <div class="frequency-control">
+                        <div class="control-header">
+                            <span class="ear-icon">👂</span>
+                            <span class="ear-label">Left Ear</span>
+                            <span class="freq-value" id="leftFreqValue">850 Hz</span>
+                        </div>
+                        <input type="range" id="leftFreq" class="freq-slider left" 
+                               min="100" max="1000" value="850" step="1">
+                        <div class="slider-labels">
+                            <span>100 Hz</span>
+                            <span>1000 Hz</span>
+                        </div>
+                    </div>
+
+                    <!-- Binaural Beat Display -->
+                    <div class="beat-display">
+                        <div class="beat-circle">
+                            <span class="beat-value" id="beatValue">0 Hz</span>
+                            <span class="beat-label">Binaural Beat</span>
+                        </div>
+                    </div>
+
+                    <!-- Right Ear -->
+                    <div class="frequency-control">
+                        <div class="control-header">
+                            <span class="ear-icon">👂</span>
+                            <span class="ear-label">Right Ear</span>
+                            <span class="freq-value" id="rightFreqValue">850 Hz</span>
+                        </div>
+                        <input type="range" id="rightFreq" class="freq-slider right" 
+                               min="100" max="1000" value="850" step="1">
+                        <div class="slider-labels">
+                            <span>100 Hz</span>
+                            <span>1000 Hz</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Playback Controls Card -->
+            <div class="card playback-card">
+                <h2 class="card-title">🎧 Playback Controls</h2>
+                
+                <div class="playback-controls">
+                    <button id="playBtn" class="control-btn play-btn">
+                        <span class="btn-icon">▶️</span>
+                        <span class="btn-text">PLAY</span>
+                    </button>
+                    <button id="stopBtn" class="control-btn stop-btn" disabled>
+                        <span class="btn-icon">⏹️</span>
+                        <span class="btn-text">STOP</span>
+                    </button>
+                </div>
+
+                <!-- Volume Control -->
+                <div class="volume-control">
+                    <span class="volume-icon">🔊</span>
+                    <input type="range" id="volume" class="volume-slider" 
+                           min="0" max="100" value="30" step="1">
+                    <span class="volume-value" id="volumeValue">30%</span>
+                </div>
+
+                <!-- Status Display -->
+                <div class="status-display">
+                    <span class="status-icon" id="statusIcon">⚫</span>
+                    <span class="status-text" id="statusText">Ready to Play</span>
+                </div>
+            </div>
+
+            <!-- Export Card -->
+            <div class="card export-card">
+                <h2 class="card-title">💾 Export Audio</h2>
+                <p class="card-description">Save your binaural beat as an audio file</p>
+                
+                <div class="export-controls">
+                    <div class="duration-input">
+                        <label for="duration">Duration:</label>
+                        <input type="number" id="duration" min="1" max="120" value="10">
+                        <span>minutes</span>
+                    </div>
+                    
+                    <div class="export-buttons">
+                        <button id="exportWavBtn" class="export-btn wav-btn">
+                            <span class="btn-icon">📁</span>
+                            <span class="btn-text">Save as WAV</span>
+                        </button>
+                        <button id="exportMp3Btn" class="export-btn mp3-btn">
+                            <span class="btn-icon">🎵</span>
+                            <span class="btn-text">Save as MP3</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Card -->
+            <div class="card info-card">
+                <h2 class="card-title">ℹ️ How It Works</h2>
+                <div class="info-content">
+                    <p><strong>Binaural beats</strong> work by playing slightly different frequencies in each ear. Your brain perceives the difference as a rhythmic beat.</p>
+                    <ul>
+                        <li><strong>850 Hz:</strong> ADHD focus frequency</li>
+                        <li><strong>Delta (1-4 Hz):</strong> Deep sleep</li>
+                        <li><strong>Theta (4-8 Hz):</strong> Meditation & creativity</li>
+                        <li><strong>Alpha (8-14 Hz):</strong> Relaxation & learning</li>
+                        <li><strong>Beta (14-30 Hz):</strong> Focus & concentration</li>
+                    </ul>
+                    <p class="warning">⚠️ Use headphones for best results. Do not use while driving or operating machinery.</p>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Made with ❤️ for better focus | Use responsibly with headphones</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

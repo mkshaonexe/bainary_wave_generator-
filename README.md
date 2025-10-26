@@ -208,11 +208,29 @@ pip install -r requirements.txt
 
 ## 🛠️ Technical Details
 
+### Web App Technology Stack
+- **HTML5**: Semantic markup with responsive design
+- **CSS3**: Modern styling with CSS variables and animations
+- **JavaScript (ES6+)**: Web Audio API for sound generation
+- **Audio Context**: Web Audio API for real-time audio processing
+- **Stereo Panners**: True left/right ear separation
+- **Offline Context**: For audio export without playback
+
+### Desktop App Technology Stack
+- **Python 3.7+**: Core programming language
+- **Tkinter**: GUI framework (built into Python)
+- **NumPy**: Scientific computing for audio generation
+- **SoundDevice**: Audio I/O for real-time playback
+- **Wave**: WAV file format support
+- **Subprocess**: MP3 conversion via ffmpeg
+
+### Audio Specifications
 - **Sample Rate**: 44,100 Hz (CD quality)
-- **Audio Format**: Stereo WAV (16-bit PCM)
+- **Audio Format**: Stereo WAV (16-bit PCM) / MP3 (192kbps)
 - **Generation Method**: Pure sine wave synthesis
 - **Playback**: Continuous stream-based audio (seamless, no gaps)
-- **Built With**: Python 3.13, NumPy, SoundDevice, Tkinter
+- **Bit Depth**: 16-bit PCM
+- **Channels**: Stereo (2 channels)
 
 ## 📋 Changelog
 
@@ -277,6 +295,70 @@ bainary_wave_generator-/
 - **`theta_wave_generator.py`**: Desktop app with GUI
 - **`requirements.txt`**: Python package dependencies
 - **`WEB_APP_README.md`**: Detailed web app documentation
+
+## 💻 Function Reference
+
+### **Web App Functions (script.js)**
+
+#### **BinauralGenerator Class**
+- `init()` - Initialize the application and set up event listeners
+- `setupEventListeners()` - Attach event handlers to all interactive elements
+- `updateDisplay()` - Refresh frequency and beat displays in real-time
+- `handleManualInput()` - Process direct frequency input from editable fields
+- `validateAndUpdateEditable()` - Validate and clamp frequency values (0-1000 Hz)
+- `animateValue()` - Animate numeric value changes with visual feedback
+- `updateSliderFill()` - Update slider background gradient based on current value
+- `adjustBeat(amount)` - Increment/decrement right ear frequency for beat adjustment
+- `togglePlayback()` - Start or stop audio playback
+- `play()` - Initialize audio context and start oscillators
+- `stop()` - Stop oscillators and clean up audio resources
+- `updateFrequencies()` - Apply frequency changes during playback
+- `updateVolume()` - Apply volume changes during playback
+- `updateUI(state)` - Update button states and visual feedback
+- `setStatus(text, active)` - Update status bar with text and indicator
+- `toggleAdditionalControls()` - Show/hide advanced settings panel
+- `applyPreset(leftFreq, rightFreq)` - Load preset frequency configurations
+- `exportAudio()` - Generate and download WAV file
+- `audioBufferToWav(buffer)` - Convert AudioBuffer to WAV binary format
+
+### **Desktop App Functions (theta_wave_generator.py)**
+
+#### **ThetaWaveGenerator Class**
+- `__init__(root)` - Initialize the application and create GUI
+- `setup_styles()` - Configure Tkinter widget styles and themes
+- `create_widgets()` - Build all GUI components (header, controls, settings)
+- `apply_preset(preset_type)` - Load preset configurations (ADHD, calm, focus, sleep)
+- `toggle_advanced()` - Show/hide advanced audio settings panel
+- `update_base_freq_label(value)` - Update left ear frequency display
+- `update_theta_freq_label(value)` - Update right ear frequency difference display
+- `update_volume_label(value)` - Update volume percentage display
+- `update_duration_label(value)` - Update duration label (legacy, now uses export duration)
+- `generate_binaural_beat(duration_seconds)` - Generate stereo audio data array
+- `play_audio()` - Start continuous audio playback in background thread
+- `_playback_loop()` - Continuous playback loop with phase continuity
+- `stop_audio()` - Stop audio stream and update UI state
+- `export_wav()` - Export audio to WAV file format
+- `export_mp3()` - Export audio to MP3 file format (requires ffmpeg)
+- `on_closing()` - Handle window close event and cleanup
+
+### **Key Features Implementation**
+
+#### **Web App Audio Engine**
+- Real-time stereo oscillation with Web Audio API
+- Independent left/right ear frequency control (0-1000 Hz)
+- Volume control (0-100%)
+- Smooth frequency transitions during playback
+- Stereo panning (-1 for left, +1 for right)
+- Offline context for silent export rendering
+
+#### **Desktop App Audio Engine**
+- Continuous stream-based playback with `sd.OutputStream`
+- Phase continuity across playback chunks
+- Callback-based audio generation for zero-latency
+- Configurable block size (2048 samples for low latency)
+- Frequency range: 100-1000 Hz (left ear), 0-20 Hz beat (right ear difference)
+- Volume range: 0-100%
+- Export duration: 1-120 minutes
 
 ## 📝 Requirements
 

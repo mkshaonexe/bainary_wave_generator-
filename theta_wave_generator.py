@@ -80,6 +80,46 @@ class ModernBinauralGenerator:
         # ========== STATUS BAR ==========
         self.create_status_bar(main_frame)
         
+        # ========== ABOUT BUTTON ==========
+        self.create_about_section(main_frame)
+        
+    def create_about_section(self, parent):
+        """Create About button with version info"""
+        about_btn_frame = tk.Frame(parent, bg=self.colors['bg_primary'])
+        about_btn_frame.pack(fill='x')
+        
+        about_btn = tk.Button(about_btn_frame,
+                            text='ℹ️ About',
+                            font=('Segoe UI', 9),
+                            bg=self.colors['bg_tertiary'],
+                            fg=self.colors['text_secondary'],
+                            activebackground=self.colors['accent_primary'],
+                            activeforeground=self.colors['bg_primary'],
+                            relief='flat', bd=0,
+                            padx=15, pady=8,
+                            cursor='hand2',
+                            command=self.show_about)
+        about_btn.pack(anchor='e')
+        
+    def show_about(self):
+        """Display about information"""
+        about_text = """Binaural Wave Generator
+Version 0.0.5
+
+Last Updated: October 6, 2024 at 7:45 PM
+Developer: mkshaon2024@gmail.com
+
+Features:
+• ADHD Focus Preset (856 Hz)
+• Custom frequency control (0-1000 Hz)
+• Real-time binaural beat generation
+• WAV and MP3 export
+• Modern dark UI interface
+
+Made with ❤️ for better focus and concentration"""
+        
+        messagebox.showinfo("About Binaural Wave Generator", about_text)
+        
     def create_ear_control(self, parent, label_text, freq_var, column):
         """Create left or right ear frequency control"""
         container = tk.Frame(parent, bg=self.colors['bg_secondary'])

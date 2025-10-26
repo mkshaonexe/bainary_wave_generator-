@@ -140,6 +140,25 @@ class BinauralGenerator {
                 this.togglePlayback();
             }
         });
+        
+        // About button
+        const aboutBtn = document.getElementById('aboutBtn');
+        const aboutModal = document.getElementById('aboutModal');
+        const closeBtn = aboutModal.querySelector('.close');
+        
+        aboutBtn.addEventListener('click', () => {
+            aboutModal.style.display = 'block';
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            aboutModal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === aboutModal) {
+                aboutModal.style.display = 'none';
+            }
+        });
     }
     
     updateDisplay() {

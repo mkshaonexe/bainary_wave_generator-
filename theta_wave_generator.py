@@ -19,9 +19,9 @@ class ModernBinauralGenerator:
         self.is_playing = False
         self.audio_position = 0
         
-        # Frequency variables
-        self.left_freq_var = tk.DoubleVar(value=357)
-        self.right_freq_var = tk.DoubleVar(value=173)
+        # Frequency variables - Default to ADHD preset (856 Hz)
+        self.left_freq_var = tk.DoubleVar(value=856)
+        self.right_freq_var = tk.DoubleVar(value=856)
         self.volume_var = tk.DoubleVar(value=30)  # 0-100 scale
         self.export_duration_var = tk.IntVar(value=10)
         

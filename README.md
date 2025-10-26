@@ -40,31 +40,88 @@ A powerful **desktop application** and **modern web app** for generating scienti
 - **😴 Deep Sleep / Healing (2 Hz Delta)** - Mimics slow-wave sleep, helps with insomnia
 - **🧘 Stop Overthinking (852 Hz Solfeggio)** - Calm mind and reduce mental clutter
 
-## 📥 Quick Start
+## 📥 Quick Start Guide
 
-### Option 1: Download Standalone Executable (Recommended)
+### 🌐 **Option 1: Web App (Recommended - No Installation)**
 
-**[📥 Download ThetaWaveGenerator.exe](https://github.com/mkshaonexe/bainary_wave_generator-/releases/latest)** - No installation required!
-
-1. Download the `.exe` file
-2. Double-click to run
-3. Choose a preset and click PLAY! 🎧
-
-### Option 2: Run from Source Code
+**Perfect for:** Quick testing, mobile devices, sharing with others
 
 ```bash
 # Clone the repository
 git clone https://github.com/mkshaonexe/bainary_wave_generator-.git
 cd bainary_wave_generator-
 
-# Install requirements
+# Open the web app in your browser
+# Method 1: Double-click index.html
+# Method 2: Right-click index.html → "Open with" → Your browser
+# Method 3: Drag index.html into your browser window
+```
+
+**That's it!** The web app will open in your browser with full functionality! 🎉
+
+### 🖥️ **Option 2: Desktop App (Full Features)**
+
+**Perfect for:** MP3 export, offline usage, system integration
+
+```bash
+# Clone the repository
+git clone https://github.com/mkshaonexe/bainary_wave_generator-.git
+cd bainary_wave_generator-
+
+# Install Python dependencies
 pip install -r requirements.txt
 
-# Run the application
+# Run the desktop application
 python theta_wave_generator.py
 ```
 
-That's it! 🎉
+### 🚀 **Option 3: Local Web Server (Best Experience)**
+
+**Perfect for:** Full web app features, testing, development
+
+```bash
+# Clone the repository
+git clone https://github.com/mkshaonexe/bainary_wave_generator-.git
+cd bainary_wave_generator-
+
+# Start a local web server (choose one):
+
+# Python 3
+python -m http.server 8000
+
+# Python 2
+python -m SimpleHTTPServer 8000
+
+# Node.js (if you have it)
+npx serve
+
+# Then open: http://localhost:8000
+```
+
+## 🎯 **Which Option Should You Choose?**
+
+| Feature | Web App | Desktop App | Local Server |
+|---------|---------|-------------|--------------|
+| **Installation** | ❌ None | ✅ Python + deps | ✅ Python/Node |
+| **MP3 Export** | ❌ WAV only | ✅ MP3 + WAV | ❌ WAV only |
+| **Offline Use** | ✅ Yes | ✅ Yes | ❌ No |
+| **Mobile Support** | ✅ Perfect | ❌ Desktop only | ✅ Perfect |
+| **Sharing** | ✅ Easy | ❌ Complex | ✅ Easy |
+| **Updates** | ✅ Auto | ❌ Manual | ✅ Auto |
+
+## 🎧 **How to Use After Installation**
+
+### **Web App Usage:**
+1. **Choose a Preset** - Click "ADHD Focus" (850 Hz) or other presets
+2. **Customize Frequencies** - Use sliders to adjust left/right ear frequencies
+3. **Click PLAY** - Start the binaural beat (use headphones!)
+4. **Export Audio** - Set duration and click "Save as WAV"
+
+### **Desktop App Usage:**
+1. **Load Preset** - Click "Load ADHD Focus Preset"
+2. **Click PLAY** - Start the 850 Hz frequency
+3. **Export MP3** - Click "Show Advanced Settings" → "Save as MP3"
+4. **Adjust Settings** - Use advanced controls for fine-tuning
 
 ## 🧠 What are the Different Frequencies?
 
@@ -110,6 +167,36 @@ Your brain perceives the difference (6 Hz in this example) as a rhythmic beat, w
 - **For Deep Sleep**: 2 Hz (Delta waves, 1-3 Hz range)
 - **Base Frequency**: 200 Hz (most comfortable for most people)
 - **Volume**: 20-40% (should be gentle and non-intrusive)
+
+## 🔧 **Troubleshooting**
+
+### **Web App Issues:**
+- **Audio not playing?** Check browser permissions for audio
+- **Sliders not working?** Try refreshing the page
+- **Export not working?** Make sure you have enough disk space
+- **Mobile issues?** Use Chrome or Safari for best compatibility
+
+### **Desktop App Issues:**
+- **Import Error?** Run `pip install -r requirements.txt`
+- **Audio Error?** Install audio drivers and restart
+- **GUI not showing?** Check Python version (3.7+ required)
+- **MP3 export fails?** Install ffmpeg for MP3 support
+
+### **Common Solutions:**
+```bash
+# Fix Python dependencies
+pip install --upgrade pip
+pip install -r requirements.txt
+
+# Fix audio issues (Windows)
+# Install Microsoft Visual C++ Redistributable
+
+# Fix audio issues (Mac)
+# Install PortAudio: brew install portaudio
+
+# Fix audio issues (Linux)
+# Install ALSA: sudo apt-get install libasound2-dev
+```
 
 ## ⚠️ Safety Notes
 

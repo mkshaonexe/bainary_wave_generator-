@@ -1,7 +1,7 @@
 # 🧠 ADHD Focus Generator - Desktop & Web App
 
 [![Download](https://img.shields.io/badge/Download-Latest%20Release-brightgreen)](https://github.com/mkshaonexe/bainary_wave_generator-/releases/latest)
-[![Version](https://img.shields.io/badge/version-0.0.4-blue)](https://github.com/mkshaonexe/bainary_wave_generator-/releases)
+[![Version](https://img.shields.io/badge/version-0.0.5-blue)](https://github.com/mkshaonexe/bainary_wave_generator-/releases)
 [![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Web-lightgrey)](https://github.com/mkshaonexe/bainary_wave_generator-)
 
 A powerful **desktop application** and **modern web app** for generating scientifically-tuned binaural beats to enhance your mental state - whether you need focus, calm, or deep sleep.
@@ -26,12 +26,16 @@ A powerful **desktop application** and **modern web app** for generating scienti
 
 ### ✨ **Features**
 
+- **🎨 Modern Dark Interface**: Matches the web app design with dark theme
 - **🎵 Continuous Playback**: Smooth, uninterrupted audio streaming
-- **⚡ ADHD Focus Preset**: 850 Hz frequency specifically for ADHD focus
-- **🔧 Advanced Controls**: Customizable left/right ear frequencies
-- **💾 Export Options**: Save as WAV or MP3 with custom duration
-- **🎨 Modern GUI**: Production-level interface with resizable window
-- **📊 Real-time Controls**: Adjust frequencies while playing
+- **🎛️ Dual Frequency Control**: Independent left/right ear sliders (0-1000 Hz)
+- **🎯 Binaural Beat Display**: Large center display showing the beat frequency
+- **⚡ Fine-Tune Controls**: ±0.1 Hz adjustment buttons for precision
+- **🎚️ Volume Control**: 0-100% volume slider with live adjustment
+- **📦 8 Quick Presets**: Theta, Alpha, Beta, Study, Calm, Sleep, Wake, ADHD
+- **💾 Export Options**: Save as WAV or MP3 with custom duration (1-120 min)
+- **📊 Real-time Controls**: Adjust frequencies and volume while playing
+- **🌑 Beautiful UI**: Dark theme matching web app aesthetics
 
 ### 🎯 **Presets Available**
 
@@ -103,6 +107,8 @@ npx serve
 | Feature | Web App | Desktop App | Local Server |
 |---------|---------|-------------|--------------|
 | **Installation** | ❌ None | ✅ Python + deps | ✅ Python/Node |
+| **Modern UI** | ✅ Dark theme | ✅ Dark theme | ✅ Dark theme |
+| **Interface** | ⭐ Original | ⭐ Matches web | ⭐ Original |
 | **MP3 Export** | ❌ WAV only | ✅ MP3 + WAV | ❌ WAV only |
 | **Offline Use** | ✅ Yes | ✅ Yes | ❌ No |
 | **Mobile Support** | ✅ Perfect | ❌ Desktop only | ✅ Perfect |
@@ -118,10 +124,11 @@ npx serve
 4. **Export Audio** - Set duration and click "Save as WAV"
 
 ### **Desktop App Usage:**
-1. **Load Preset** - Click "Load ADHD Focus Preset"
-2. **Click PLAY** - Start the 850 Hz frequency
-3. **Export MP3** - Click "Show Advanced Settings" → "Save as MP3"
-4. **Adjust Settings** - Use advanced controls for fine-tuning
+1. **Adjust Frequencies** - Use left/right sliders or ±0.1 buttons
+2. **Choose a Preset** - Click any preset button (ADHD, Theta, etc.)
+3. **Click PLAY** - Start the binaural beat (use headphones!)
+4. **Adjust Volume** - Use volume slider in "More Options"
+5. **Export Audio** - Set duration and click "Export WAV" or "Export MP3"
 
 ## 🧠 What are the Different Frequencies?
 
@@ -234,7 +241,31 @@ pip install -r requirements.txt
 
 ## 📋 Changelog
 
-### v0.0.4 (Latest) - MAJOR UPDATE
+### v0.0.5 (Latest) - COMPLETE UI REDESIGN
+
+- ✅ **🖥️ Desktop App Redesign - Now Matches Web App!**
+  - Complete UI overhaul to match modern web app interface
+  - Dark theme with matching colors (#0B1220 background)
+  - Three-column layout: Left Ear | Beat Control | Right Ear
+  - Large frequency displays (56pt font) with Hz labels
+  - Independent frequency sliders (0-1000 Hz range)
+  - Center binaural beat display with ±0.1 Hz adjust buttons
+  - Circular play/pause button with visual feedback
+  - Collapsible "More Options" section
+  - Volume slider (0-100%) with percentage display
+  - 8 quick preset buttons in grid layout
+  - Export controls (WAV/MP3) with duration selector
+  - Status bar with indicator dot and text
+  - All functions from web app now in desktop app
+  - Real-time frequency adjustment during playback
+  - Production-quality modern interface
+
+- ✅ **📚 Enhanced Documentation**
+  - Added comprehensive function reference
+  - Technical stack details for both apps
+  - Implementation details for audio engines
+
+### v0.0.4 - MAJOR UPDATE
 
 - ✅ **🌐 NEW: Complete Web Application**
   - Modern dark theme with animated background

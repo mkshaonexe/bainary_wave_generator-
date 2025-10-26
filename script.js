@@ -40,7 +40,7 @@ class BinauralGenerator {
     }
     
     setupEventListeners() {
-        // Frequency sliders
+    // Frequency sliders
         this.elements.leftFreq.addEventListener('input', () => {
             this.updateDisplay();
             this.updateSliderFill(this.elements.leftFreq);
@@ -60,6 +60,37 @@ class BinauralGenerator {
         // Initialize slider fills
         this.updateSliderFill(this.elements.leftFreq);
         this.updateSliderFill(this.elements.rightFreq);
+        
+        // Manual frequency input handlers
+        this.elements.leftFreqValue.addEventListener('input', (e) => {
+            this.handleManualInput(e.target, this.elements.leftFreq);
+        });
+        
+        this.elements.leftFreqValue.addEventListener('blur', (e) => {
+            this.validateAndUpdateEditable(e.target, this.elements.leftFreq);
+        });
+        
+        this.elements.leftFreqValue.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === 'Escape') {
+                this.validateAndUpdateEditable(e.target, this.elements.leftFreq);
+                e.target.blur();
+            }
+        });
+        
+        this.elements.rightFreqValue.addEventListener('input', (e) => {
+            this.handleManualInput(e.target, this.elements.rightFreq);
+        });
+        
+        this.elements.rightFreqValue.addEventListener('blur', (e) => {
+            this.validateAndUpdateEditable(e.target, this.elements.rightFreq);
+        });
+        
+        this.elements.rightFreqValue.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === 'Escape') {
+                this.validateAndUpdateEditable(e.target, this.elements.rightFreq);
+                e.target.blur();
+            }
+        });
         
         // Beat adjustment buttons
         this.elements.decreaseBeat.addEventListener('click', () => {
@@ -87,10 +118,10 @@ class BinauralGenerator {
         this.elements.toggleControls.addEventListener('click', () => {
             this.toggleAdditionalControls();
         });
-        
-        // Preset buttons
+
+    // Preset buttons
         document.querySelectorAll('.preset-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
+        btn.addEventListener('click', () => {
                 const left = parseFloat(btn.dataset.left);
                 const right = parseFloat(btn.dataset.right);
                 this.applyPreset(left, right);
@@ -116,10 +147,64 @@ class BinauralGenerator {
         const rightFreq = parseFloat(this.elements.rightFreq.value);
         const beat = Math.abs(leftFreq - rightFreq);
         
-        // Animate the number changes
-        this.animateValue(this.elements.leftFreqValue, Math.round(leftFreq));
-        this.animateValue(this.elements.rightFreqValue, Math.round(rightFreq));
+        // Update display if not currently being edited
+        if (document.activeElement !== this.elements.leftFreqValue) {
+            this.elements.leftFreqValue.textContent = Math.round(leftFreq);
+        }
+        if (document.activeElement !== this.elements.rightFreqValue) {
+            this.elements.rightFreqValue.textContent = Math.round(rightFreq);
+        }
+        
+        // Update beat display
         this.animateValue(this.elements.beatValue, Math.round(beat));
+    }
+    
+    handleManualInput(element, sliderElement) {
+        const text = element.textContent.trim();
+        const value = parseFloat(text);
+        
+        // Allow numeric input, empty, or valid numbers
+        if (!isNaN(value) && value >= 0 && value <= 1000) {
+            sliderElement.value = value;
+            this.updateSliderFill(sliderElement);
+            if (this.isPlaying) {
+                this.updateFrequencies();
+            }
+            // Update beat display
+            const leftFreq = parseFloat(this.elements.leftFreq.value);
+            const rightFreq = parseFloat(this.elements.rightFreq.value);
+            const beat = Math.abs(leftFreq - rightFreq);
+            this.animateValue(this.elements.beatValue, Math.round(beat));
+        }
+    }
+    
+    validateAndUpdateEditable(element, sliderElement) {
+        let value = parseFloat(element.textContent.trim());
+        
+        // Validate and clamp to 0-1000
+        if (isNaN(value) || element.textContent.trim() === '') {
+            value = parseFloat(sliderElement.value);
+        } else {
+            value = Math.max(0, Math.min(1000, value));
+        }
+        
+        // Update both editable element and slider
+        element.textContent = Math.round(value);
+        sliderElement.value = value;
+        
+        // Update slider fill
+        this.updateSliderFill(sliderElement);
+        
+        // Update beat display
+        const leftFreq = parseFloat(this.elements.leftFreq.value);
+        const rightFreq = parseFloat(this.elements.rightFreq.value);
+        const beat = Math.abs(leftFreq - rightFreq);
+        this.animateValue(this.elements.beatValue, Math.round(beat));
+        
+        // Update audio if playing
+        if (this.isPlaying) {
+            this.updateFrequencies();
+        }
     }
     
     animateValue(element, newValue) {
@@ -187,25 +272,25 @@ class BinauralGenerator {
             // Create oscillators
             this.leftOscillator = this.audioContext.createOscillator();
             this.rightOscillator = this.audioContext.createOscillator();
-            
-            // Create gain nodes
+
+    // Create gain nodes
             this.leftGain = this.audioContext.createGain();
             this.rightGain = this.audioContext.createGain();
             
             // Create stereo panner for left/right separation
             const leftPanner = this.audioContext.createStereoPanner();
             const rightPanner = this.audioContext.createStereoPanner();
-            leftPanner.pan.value = -1; // Full left
-            rightPanner.pan.value = 1;  // Full right
-            
+    leftPanner.pan.value = -1; // Full left
+    rightPanner.pan.value = 1;  // Full right
+
             // Set oscillator type
             this.leftOscillator.type = 'sine';
             this.rightOscillator.type = 'sine';
-            
-            // Set frequencies
+
+    // Set frequencies
             this.updateFrequencies();
-            
-            // Set volume
+
+    // Set volume
             this.updateVolume();
             
             // Connect the audio graph
@@ -216,8 +301,8 @@ class BinauralGenerator {
             this.rightOscillator.connect(this.rightGain);
             this.rightGain.connect(rightPanner);
             rightPanner.connect(this.audioContext.destination);
-            
-            // Start oscillators
+
+    // Start oscillators
             this.leftOscillator.start();
             this.rightOscillator.start();
             
@@ -233,7 +318,7 @@ class BinauralGenerator {
     
     stop() {
         try {
-            // Stop oscillators
+    // Stop oscillators
             if (this.leftOscillator) {
                 this.leftOscillator.stop();
                 this.leftOscillator.disconnect();
@@ -244,9 +329,9 @@ class BinauralGenerator {
                 this.rightOscillator.stop();
                 this.rightOscillator.disconnect();
                 this.rightOscillator = null;
-            }
-            
-            // Close audio context
+    }
+
+    // Close audio context
             if (this.audioContext) {
                 this.audioContext.close();
                 this.audioContext = null;
@@ -388,39 +473,39 @@ class BinauralGenerator {
             // Render audio
             offlineContext.startRendering().then(buffer => {
                 const wav = this.audioBufferToWav(buffer);
-                const blob = new Blob([wav], { type: 'audio/wav' });
+        const blob = new Blob([wav], { type: 'audio/wav' });
                 const url = URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.href = url;
+
+        const a = document.createElement('a');
+        a.href = url;
                 a.download = `binaural_${Math.round(leftOsc.frequency.value)}-${Math.round(rightOsc.frequency.value)}_${this.elements.duration.value}min.wav`;
-                a.click();
-                
+        a.click();
+
                 URL.revokeObjectURL(url);
-                
+        
                 this.setStatus('Export successful!', false);
-                setTimeout(() => {
+        setTimeout(() => {
                     this.setStatus(this.isPlaying ? 'Playing' : 'Ready', this.isPlaying);
-                }, 3000);
+        }, 3000);
             }).catch(error => {
                 console.error('Export error:', error);
                 this.setStatus('Export failed', false);
             });
             
-        } catch (error) {
-            console.error('Export error:', error);
+    } catch (error) {
+        console.error('Export error:', error);
             this.setStatus('Export failed', false);
         }
     }
     
     // Convert AudioBuffer to WAV format
     audioBufferToWav(buffer) {
-        const length = buffer.length * buffer.numberOfChannels * 2 + 44;
-        const arrayBuffer = new ArrayBuffer(length);
-        const view = new DataView(arrayBuffer);
-        const channels = [];
-        let offset = 0;
-        let pos = 0;
+    const length = buffer.length * buffer.numberOfChannels * 2 + 44;
+    const arrayBuffer = new ArrayBuffer(length);
+    const view = new DataView(arrayBuffer);
+    const channels = [];
+    let offset = 0;
+    let pos = 0;
         
         // Helper functions
         const setUint16 = (data) => {
@@ -432,40 +517,40 @@ class BinauralGenerator {
             view.setUint32(pos, data, true);
             pos += 4;
         };
-        
-        // Write WAV header
-        setUint32(0x46464952); // "RIFF"
-        setUint32(length - 8); // file length - 8
-        setUint32(0x45564157); // "WAVE"
-        
-        setUint32(0x20746d66); // "fmt " chunk
-        setUint32(16); // length = 16
-        setUint16(1); // PCM (uncompressed)
-        setUint16(buffer.numberOfChannels);
-        setUint32(buffer.sampleRate);
-        setUint32(buffer.sampleRate * 2 * buffer.numberOfChannels); // avg. bytes/sec
-        setUint16(buffer.numberOfChannels * 2); // block-align
-        setUint16(16); // 16-bit
-        
+
+    // Write WAV header
+    setUint32(0x46464952); // "RIFF"
+    setUint32(length - 8); // file length - 8
+    setUint32(0x45564157); // "WAVE"
+
+    setUint32(0x20746d66); // "fmt " chunk
+    setUint32(16); // length = 16
+    setUint16(1); // PCM (uncompressed)
+    setUint16(buffer.numberOfChannels);
+    setUint32(buffer.sampleRate);
+    setUint32(buffer.sampleRate * 2 * buffer.numberOfChannels); // avg. bytes/sec
+    setUint16(buffer.numberOfChannels * 2); // block-align
+    setUint16(16); // 16-bit
+
         setUint32(0x61746164); // "data" chunk
-        setUint32(length - pos - 4); // chunk length
-        
-        // Write interleaved data
+    setUint32(length - pos - 4); // chunk length
+
+    // Write interleaved data
+    for (let i = 0; i < buffer.numberOfChannels; i++) {
+        channels.push(buffer.getChannelData(i));
+    }
+
+    while (pos < length) {
         for (let i = 0; i < buffer.numberOfChannels; i++) {
-            channels.push(buffer.getChannelData(i));
+            let sample = Math.max(-1, Math.min(1, channels[i][offset]));
+            sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+            view.setInt16(pos, sample, true);
+            pos += 2;
         }
-        
-        while (pos < length) {
-            for (let i = 0; i < buffer.numberOfChannels; i++) {
-                let sample = Math.max(-1, Math.min(1, channels[i][offset]));
-                sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
-                view.setInt16(pos, sample, true);
-                pos += 2;
-            }
-            offset++;
-        }
-        
-        return arrayBuffer;
+        offset++;
+    }
+
+    return arrayBuffer;
     }
 }
 

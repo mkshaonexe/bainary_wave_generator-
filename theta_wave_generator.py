@@ -125,15 +125,20 @@ class ModernBinauralGenerator:
                          orient='horizontal',
                          variable=freq_var,
                          showvalue=False,
-                         bg=self.colors['bg_tertiary'],
-                         fg=self.colors['accent_primary'],
+                         bg=self.colors['accent_primary'],
+                         fg='white',
                          activebackground=self.colors['accent_primary'],
                          highlightthickness=0,
+                         highlightbackground=self.colors['bg_secondary'],
                          troughcolor=self.colors['bg_tertiary'],
-                         sliderrelief='flat',
-                         length=300)
+                         sliderlength=30,
+                         sliderrelief='raised',
+                         bd=2,
+                         width=12,
+                         length=300,
+                         command=lambda v: self.update_freq_display())
         slider.pack(fill='x')
-        slider.bind('<Motion>', lambda e: self.update_freq_display())
+        slider.bind('<B1-Motion>', lambda e: self.update_freq_display())
         slider.bind('<ButtonRelease-1>', lambda e: self.update_freq_display())
         
         # Slider labels
@@ -264,12 +269,16 @@ class ModernBinauralGenerator:
                                      orient='horizontal',
                                      variable=self.volume_var,
                                      showvalue=False,
-                                     bg=self.colors['bg_tertiary'],
-                                     fg=self.colors['accent_primary'],
+                                     bg=self.colors['accent_primary'],
+                                     fg='white',
                                      activebackground=self.colors['accent_primary'],
                                      highlightthickness=0,
                                      troughcolor=self.colors['bg_tertiary'],
-                                     sliderrelief='flat')
+                                     sliderlength=25,
+                                     sliderrelief='raised',
+                                     bd=2,
+                                     width=12,
+                                     command=self.update_volume_label)
         self.volume_slider.pack(side='left', fill='x', expand=True)
         
         self.volume_value_label = tk.Label(volume_frame, text='30%',
@@ -278,8 +287,6 @@ class ModernBinauralGenerator:
                                           fg=self.colors['text_primary'],
                                           width=6)
         self.volume_value_label.pack(side='left', padx=(10, 0))
-        
-        self.volume_slider.configure(command=self.update_volume_label)
         
         # Presets
         presets_label = tk.Label(inner_options, text='PRESETS',

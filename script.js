@@ -1,394 +1,484 @@
-// Audio Context and Oscillators
-let audioContext = null;
-let leftOscillator = null;
-let rightOscillator = null;
-let leftGain = null;
-let rightGain = null;
-let isPlaying = false;
+// Modern Binaural Wave Generator - JavaScript
+// Professional audio engine with Web Audio API
 
-// Get DOM elements
-const leftFreqSlider = document.getElementById('leftFreq');
-const rightFreqSlider = document.getElementById('rightFreq');
-const leftFreqValue = document.getElementById('leftFreqValue');
-const rightFreqValue = document.getElementById('rightFreqValue');
-const beatValue = document.getElementById('beatValue');
-const volumeSlider = document.getElementById('volume');
-const volumeValue = document.getElementById('volumeValue');
-const playBtn = document.getElementById('playBtn');
-const stopBtn = document.getElementById('stopBtn');
-const statusIcon = document.getElementById('statusIcon');
-const statusText = document.getElementById('statusText');
-const presetButtons = document.querySelectorAll('.preset-btn');
-const exportWavBtn = document.getElementById('exportWavBtn');
-const exportMp3Btn = document.getElementById('exportMp3Btn');
-const durationInput = document.getElementById('duration');
-
-// Initialize
-function init() {
-    updateFrequencyDisplay();
-    updateBeatDisplay();
-    setupEventListeners();
-}
-
-// Setup Event Listeners
-function setupEventListeners() {
-    // Frequency sliders
-    leftFreqSlider.addEventListener('input', () => {
-        updateFrequencyDisplay();
-        updateBeatDisplay();
-        if (isPlaying) {
-            updateOscillatorFrequencies();
-        }
-    });
-
-    rightFreqSlider.addEventListener('input', () => {
-        updateFrequencyDisplay();
-        updateBeatDisplay();
-        if (isPlaying) {
-            updateOscillatorFrequencies();
-        }
-    });
-
-    // Volume slider
-    volumeSlider.addEventListener('input', () => {
-        const volume = volumeSlider.value;
-        volumeValue.textContent = `${volume}%`;
-        if (isPlaying) {
-            updateVolume();
-        }
-    });
-
-    // Playback buttons
-    playBtn.addEventListener('click', startAudio);
-    stopBtn.addEventListener('click', stopAudio);
-
-    // Preset buttons
-    presetButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const leftFreq = btn.dataset.left;
-            const rightFreq = btn.dataset.right;
-            applyPreset(leftFreq, rightFreq);
-            
-            // Update active state
-            presetButtons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-        });
-    });
-
-    // Export buttons
-    exportWavBtn.addEventListener('click', exportWAV);
-    exportMp3Btn.addEventListener('click', exportMP3);
-}
-
-// Update Frequency Display
-function updateFrequencyDisplay() {
-    const leftFreq = leftFreqSlider.value;
-    const rightFreq = rightFreqSlider.value;
-    leftFreqValue.textContent = `${leftFreq} Hz`;
-    rightFreqValue.textContent = `${rightFreq} Hz`;
-}
-
-// Update Beat Display
-function updateBeatDisplay() {
-    const leftFreq = parseInt(leftFreqSlider.value);
-    const rightFreq = parseInt(rightFreqSlider.value);
-    const beat = Math.abs(rightFreq - leftFreq);
-    beatValue.textContent = `${beat} Hz`;
-}
-
-// Apply Preset
-function applyPreset(leftFreq, rightFreq) {
-    leftFreqSlider.value = leftFreq;
-    rightFreqSlider.value = rightFreq;
-    updateFrequencyDisplay();
-    updateBeatDisplay();
-    
-    if (isPlaying) {
-        updateOscillatorFrequencies();
-    }
-}
-
-// Start Audio
-function startAudio() {
-    if (isPlaying) return;
-
-    // Create Audio Context
-    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-
-    // Create oscillators for left and right channels
-    leftOscillator = audioContext.createOscillator();
-    rightOscillator = audioContext.createOscillator();
-
-    // Create gain nodes
-    leftGain = audioContext.createGain();
-    rightGain = audioContext.createGain();
-
-    // Create stereo panner for left and right separation
-    const leftPanner = audioContext.createStereoPanner();
-    const rightPanner = audioContext.createStereoPanner();
-    leftPanner.pan.value = -1; // Full left
-    rightPanner.pan.value = 1;  // Full right
-
-    // Set oscillator types
-    leftOscillator.type = 'sine';
-    rightOscillator.type = 'sine';
-
-    // Set frequencies
-    updateOscillatorFrequencies();
-
-    // Set volume
-    updateVolume();
-
-    // Connect nodes
-    leftOscillator.connect(leftGain);
-    leftGain.connect(leftPanner);
-    leftPanner.connect(audioContext.destination);
-
-    rightOscillator.connect(rightGain);
-    rightGain.connect(rightPanner);
-    rightPanner.connect(audioContext.destination);
-
-    // Start oscillators
-    leftOscillator.start();
-    rightOscillator.start();
-
-    // Update UI
-    isPlaying = true;
-    playBtn.disabled = true;
-    stopBtn.disabled = false;
-    updateStatus('playing', '🎵 Playing - Focus Mode Active');
-}
-
-// Stop Audio
-function stopAudio() {
-    if (!isPlaying) return;
-
-    // Stop oscillators
-    if (leftOscillator) {
-        leftOscillator.stop();
-        leftOscillator.disconnect();
-        leftOscillator = null;
-    }
-
-    if (rightOscillator) {
-        rightOscillator.stop();
-        rightOscillator.disconnect();
-        rightOscillator = null;
-    }
-
-    // Close audio context
-    if (audioContext) {
-        audioContext.close();
-        audioContext = null;
-    }
-
-    // Update UI
-    isPlaying = false;
-    playBtn.disabled = false;
-    stopBtn.disabled = true;
-    updateStatus('stopped', '⚫ Stopped');
-}
-
-// Update Oscillator Frequencies
-function updateOscillatorFrequencies() {
-    if (!leftOscillator || !rightOscillator) return;
-
-    const leftFreq = parseFloat(leftFreqSlider.value);
-    const rightFreq = parseFloat(rightFreqSlider.value);
-
-    leftOscillator.frequency.setValueAtTime(leftFreq, audioContext.currentTime);
-    rightOscillator.frequency.setValueAtTime(rightFreq, audioContext.currentTime);
-}
-
-// Update Volume
-function updateVolume() {
-    if (!leftGain || !rightGain) return;
-
-    const volume = volumeSlider.value / 100;
-    leftGain.gain.setValueAtTime(volume, audioContext.currentTime);
-    rightGain.gain.setValueAtTime(volume, audioContext.currentTime);
-}
-
-// Update Status
-function updateStatus(type, text) {
-    statusText.textContent = text;
-    
-    if (type === 'playing') {
-        statusIcon.textContent = '🎵';
-        statusText.style.color = '#00b894';
-    } else if (type === 'stopped') {
-        statusIcon.textContent = '⚫';
-        statusText.style.color = '#a0aec0';
-    } else if (type === 'exporting') {
-        statusIcon.textContent = '💾';
-        statusText.style.color = '#fdcb6e';
-    } else if (type === 'success') {
-        statusIcon.textContent = '✓';
-        statusText.style.color = '#00b894';
-    } else if (type === 'error') {
-        statusIcon.textContent = '❌';
-        statusText.style.color = '#d63031';
-    }
-}
-
-// Generate Audio Buffer
-function generateAudioBuffer(duration) {
-    const sampleRate = 44100;
-    const length = sampleRate * duration;
-    const buffer = new AudioBuffer({
-        length: length,
-        numberOfChannels: 2,
-        sampleRate: sampleRate
-    });
-
-    const leftChannel = buffer.getChannelData(0);
-    const rightChannel = buffer.getChannelData(1);
-
-    const leftFreq = parseFloat(leftFreqSlider.value);
-    const rightFreq = parseFloat(rightFreqSlider.value);
-    const volume = volumeSlider.value / 100;
-
-    // Generate sine waves
-    for (let i = 0; i < length; i++) {
-        const t = i / sampleRate;
-        leftChannel[i] = Math.sin(2 * Math.PI * leftFreq * t) * volume;
-        rightChannel[i] = Math.sin(2 * Math.PI * rightFreq * t) * volume;
-    }
-
-    return buffer;
-}
-
-// Export WAV
-function exportWAV() {
-    updateStatus('exporting', '💾 Generating WAV file...');
-
-    try {
-        const duration = parseInt(durationInput.value) * 60; // Convert to seconds
-        const buffer = generateAudioBuffer(duration);
-
-        // Convert AudioBuffer to WAV
-        const wav = audioBufferToWav(buffer);
-        const blob = new Blob([wav], { type: 'audio/wav' });
-
-        // Download
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `adhd_focus_${leftFreqSlider.value}hz.wav`;
-        a.click();
-
-        updateStatus('success', '✓ WAV export successful!');
-        setTimeout(() => {
-            updateStatus(isPlaying ? 'playing' : 'stopped', 
-                        isPlaying ? '🎵 Playing - Focus Mode Active' : '⚫ Stopped');
-        }, 3000);
-    } catch (error) {
-        console.error('Export error:', error);
-        updateStatus('error', '❌ WAV export failed');
-        setTimeout(() => {
-            updateStatus(isPlaying ? 'playing' : 'stopped', 
-                        isPlaying ? '🎵 Playing - Focus Mode Active' : '⚫ Stopped');
-        }, 3000);
-    }
-}
-
-// Export MP3 (Note: Browser-based MP3 encoding is complex, so we'll export as WAV with MP3 filename)
-function exportMP3() {
-    updateStatus('exporting', '🎵 Generating audio file...');
-
-    try {
-        const duration = parseInt(durationInput.value) * 60;
-        const buffer = generateAudioBuffer(duration);
-
-        // Convert to WAV (MP3 encoding requires external library)
-        const wav = audioBufferToWav(buffer);
-        const blob = new Blob([wav], { type: 'audio/wav' });
-
-        // Download
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `adhd_focus_${leftFreqSlider.value}hz.wav`;
-        a.click();
-
-        updateStatus('success', '✓ Audio export successful!');
-        alert('Note: Browser exports as WAV format. For MP3 conversion, use an online converter or the desktop app.');
+class BinauralGenerator {
+    constructor() {
+        // Audio context and nodes
+        this.audioContext = null;
+        this.leftOscillator = null;
+        this.rightOscillator = null;
+        this.leftGain = null;
+        this.rightGain = null;
+        this.isPlaying = false;
         
-        setTimeout(() => {
-            updateStatus(isPlaying ? 'playing' : 'stopped', 
-                        isPlaying ? '🎵 Playing - Focus Mode Active' : '⚫ Stopped');
-        }, 3000);
-    } catch (error) {
-        console.error('Export error:', error);
-        updateStatus('error', '❌ Export failed');
-        setTimeout(() => {
-            updateStatus(isPlaying ? 'playing' : 'stopped', 
-                        isPlaying ? '🎵 Playing - Focus Mode Active' : '⚫ Stopped');
-        }, 3000);
+        // DOM elements
+        this.elements = {
+            leftFreq: document.getElementById('leftFreq'),
+            rightFreq: document.getElementById('rightFreq'),
+            leftFreqValue: document.getElementById('leftFreqValue'),
+            rightFreqValue: document.getElementById('rightFreqValue'),
+            beatValue: document.getElementById('beatValue'),
+            playBtn: document.getElementById('playBtn'),
+            decreaseBeat: document.getElementById('decreaseBeat'),
+            increaseBeat: document.getElementById('increaseBeat'),
+            volume: document.getElementById('volume'),
+            volumeValue: document.getElementById('volumeValue'),
+            toggleControls: document.getElementById('toggleControls'),
+            controlsContent: document.getElementById('controlsContent'),
+            exportBtn: document.getElementById('exportBtn'),
+            duration: document.getElementById('duration'),
+            statusIndicator: document.getElementById('statusIndicator'),
+            statusText: document.getElementById('statusText')
+        };
+        
+        this.init();
     }
-}
-
-// Convert AudioBuffer to WAV
-function audioBufferToWav(buffer) {
-    const length = buffer.length * buffer.numberOfChannels * 2 + 44;
-    const arrayBuffer = new ArrayBuffer(length);
-    const view = new DataView(arrayBuffer);
-    const channels = [];
-    let offset = 0;
-    let pos = 0;
-
-    // Write WAV header
-    setUint32(0x46464952); // "RIFF"
-    setUint32(length - 8); // file length - 8
-    setUint32(0x45564157); // "WAVE"
-
-    setUint32(0x20746d66); // "fmt " chunk
-    setUint32(16); // length = 16
-    setUint16(1); // PCM (uncompressed)
-    setUint16(buffer.numberOfChannels);
-    setUint32(buffer.sampleRate);
-    setUint32(buffer.sampleRate * 2 * buffer.numberOfChannels); // avg. bytes/sec
-    setUint16(buffer.numberOfChannels * 2); // block-align
-    setUint16(16); // 16-bit
-
-    setUint32(0x61746164); // "data" - chunk
-    setUint32(length - pos - 4); // chunk length
-
-    // Write interleaved data
-    for (let i = 0; i < buffer.numberOfChannels; i++) {
-        channels.push(buffer.getChannelData(i));
+    
+    init() {
+        this.setupEventListeners();
+        this.updateDisplay();
     }
-
-    while (pos < length) {
-        for (let i = 0; i < buffer.numberOfChannels; i++) {
-            let sample = Math.max(-1, Math.min(1, channels[i][offset]));
-            sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
-            view.setInt16(pos, sample, true);
-            pos += 2;
+    
+    setupEventListeners() {
+        // Frequency sliders
+        this.elements.leftFreq.addEventListener('input', () => {
+            this.updateDisplay();
+            this.updateSliderFill(this.elements.leftFreq);
+            if (this.isPlaying) {
+                this.updateFrequencies();
+            }
+        });
+        
+        this.elements.rightFreq.addEventListener('input', () => {
+            this.updateDisplay();
+            this.updateSliderFill(this.elements.rightFreq);
+            if (this.isPlaying) {
+                this.updateFrequencies();
+            }
+        });
+        
+        // Initialize slider fills
+        this.updateSliderFill(this.elements.leftFreq);
+        this.updateSliderFill(this.elements.rightFreq);
+        
+        // Beat adjustment buttons
+        this.elements.decreaseBeat.addEventListener('click', () => {
+            this.adjustBeat(-0.1);
+        });
+        
+        this.elements.increaseBeat.addEventListener('click', () => {
+            this.adjustBeat(0.1);
+        });
+        
+        // Play button
+        this.elements.playBtn.addEventListener('click', () => {
+            this.togglePlayback();
+        });
+        
+        // Volume control
+        this.elements.volume.addEventListener('input', () => {
+            this.elements.volumeValue.textContent = `${this.elements.volume.value}%`;
+            if (this.isPlaying) {
+                this.updateVolume();
+            }
+        });
+        
+        // Toggle additional controls
+        this.elements.toggleControls.addEventListener('click', () => {
+            this.toggleAdditionalControls();
+        });
+        
+        // Preset buttons
+        document.querySelectorAll('.preset-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const left = parseFloat(btn.dataset.left);
+                const right = parseFloat(btn.dataset.right);
+                this.applyPreset(left, right);
+            });
+        });
+        
+        // Export button
+        this.elements.exportBtn.addEventListener('click', () => {
+            this.exportAudio();
+        });
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+                e.preventDefault();
+                this.togglePlayback();
+            }
+        });
+    }
+    
+    updateDisplay() {
+        const leftFreq = parseFloat(this.elements.leftFreq.value);
+        const rightFreq = parseFloat(this.elements.rightFreq.value);
+        const beat = Math.abs(leftFreq - rightFreq);
+        
+        // Animate the number changes
+        this.animateValue(this.elements.leftFreqValue, Math.round(leftFreq));
+        this.animateValue(this.elements.rightFreqValue, Math.round(rightFreq));
+        this.animateValue(this.elements.beatValue, Math.round(beat));
+    }
+    
+    animateValue(element, newValue) {
+        // Add a pulse effect when value changes
+        const currentValue = parseInt(element.textContent) || 0;
+        
+        if (currentValue !== newValue) {
+            element.style.transform = 'scale(1.1)';
+            element.style.color = 'var(--accent-primary)';
+            
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+                element.style.color = '';
+            }, 150);
         }
-        offset++;
+        
+        element.textContent = newValue;
     }
-
-    return arrayBuffer;
-
-    function setUint16(data) {
-        view.setUint16(pos, data, true);
-        pos += 2;
+    
+    updateSliderFill(slider) {
+        const value = parseFloat(slider.value);
+        const min = parseFloat(slider.min);
+        const max = parseFloat(slider.max);
+        const percentage = ((value - min) / (max - min)) * 100;
+        
+        slider.style.background = `linear-gradient(to right, 
+            var(--accent-primary) 0%, 
+            var(--accent-primary) ${percentage}%, 
+            var(--bg-tertiary) ${percentage}%, 
+            var(--bg-tertiary) 100%)`;
     }
-
-    function setUint32(data) {
-        view.setUint32(pos, data, true);
-        pos += 4;
+    
+    adjustBeat(amount) {
+        const currentRight = parseFloat(this.elements.rightFreq.value);
+        const newRight = Math.max(0, Math.min(1000, currentRight + amount));
+        this.elements.rightFreq.value = newRight;
+        this.updateDisplay();
+        this.updateSliderFill(this.elements.rightFreq);
+        
+        // Visual feedback for button press
+        const button = amount < 0 ? this.elements.decreaseBeat : this.elements.increaseBeat;
+        button.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            button.style.transform = '';
+        }, 100);
+        
+        if (this.isPlaying) {
+            this.updateFrequencies();
+        }
+    }
+    
+    togglePlayback() {
+        if (this.isPlaying) {
+            this.stop();
+        } else {
+            this.play();
+        }
+    }
+    
+    play() {
+        try {
+            // Create audio context
+            this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            // Create oscillators
+            this.leftOscillator = this.audioContext.createOscillator();
+            this.rightOscillator = this.audioContext.createOscillator();
+            
+            // Create gain nodes
+            this.leftGain = this.audioContext.createGain();
+            this.rightGain = this.audioContext.createGain();
+            
+            // Create stereo panner for left/right separation
+            const leftPanner = this.audioContext.createStereoPanner();
+            const rightPanner = this.audioContext.createStereoPanner();
+            leftPanner.pan.value = -1; // Full left
+            rightPanner.pan.value = 1;  // Full right
+            
+            // Set oscillator type
+            this.leftOscillator.type = 'sine';
+            this.rightOscillator.type = 'sine';
+            
+            // Set frequencies
+            this.updateFrequencies();
+            
+            // Set volume
+            this.updateVolume();
+            
+            // Connect the audio graph
+            this.leftOscillator.connect(this.leftGain);
+            this.leftGain.connect(leftPanner);
+            leftPanner.connect(this.audioContext.destination);
+            
+            this.rightOscillator.connect(this.rightGain);
+            this.rightGain.connect(rightPanner);
+            rightPanner.connect(this.audioContext.destination);
+            
+            // Start oscillators
+            this.leftOscillator.start();
+            this.rightOscillator.start();
+            
+            // Update state
+            this.isPlaying = true;
+            this.updateUI('playing');
+            
+        } catch (error) {
+            console.error('Error starting audio:', error);
+            this.setStatus('Error: Could not start audio', false);
+        }
+    }
+    
+    stop() {
+        try {
+            // Stop oscillators
+            if (this.leftOscillator) {
+                this.leftOscillator.stop();
+                this.leftOscillator.disconnect();
+                this.leftOscillator = null;
+            }
+            
+            if (this.rightOscillator) {
+                this.rightOscillator.stop();
+                this.rightOscillator.disconnect();
+                this.rightOscillator = null;
+            }
+            
+            // Close audio context
+            if (this.audioContext) {
+                this.audioContext.close();
+                this.audioContext = null;
+            }
+            
+            // Update state
+            this.isPlaying = false;
+            this.updateUI('stopped');
+            
+        } catch (error) {
+            console.error('Error stopping audio:', error);
+        }
+    }
+    
+    updateFrequencies() {
+        if (!this.leftOscillator || !this.rightOscillator || !this.audioContext) return;
+        
+        const leftFreq = parseFloat(this.elements.leftFreq.value);
+        const rightFreq = parseFloat(this.elements.rightFreq.value);
+        
+        this.leftOscillator.frequency.setValueAtTime(leftFreq, this.audioContext.currentTime);
+        this.rightOscillator.frequency.setValueAtTime(rightFreq, this.audioContext.currentTime);
+    }
+    
+    updateVolume() {
+        if (!this.leftGain || !this.rightGain || !this.audioContext) return;
+        
+        const volume = parseFloat(this.elements.volume.value) / 100;
+        
+        this.leftGain.gain.setValueAtTime(volume, this.audioContext.currentTime);
+        this.rightGain.gain.setValueAtTime(volume, this.audioContext.currentTime);
+    }
+    
+    updateUI(state) {
+        if (state === 'playing') {
+            this.elements.playBtn.classList.add('playing');
+            this.elements.playBtn.innerHTML = `
+                <svg class="play-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="6" y="4" width="4" height="16"/>
+                    <rect x="14" y="4" width="4" height="16"/>
+                </svg>
+            `;
+            this.setStatus('Playing', true);
+        } else {
+            this.elements.playBtn.classList.remove('playing');
+            this.elements.playBtn.innerHTML = `
+                <svg class="play-icon" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                </svg>
+            `;
+            this.setStatus('Ready', false);
+        }
+    }
+    
+    setStatus(text, active) {
+        this.elements.statusText.textContent = text;
+        if (active) {
+            this.elements.statusIndicator.classList.add('active');
+        } else {
+            this.elements.statusIndicator.classList.remove('active');
+        }
+    }
+    
+    toggleAdditionalControls() {
+        const content = this.elements.controlsContent;
+        const button = this.elements.toggleControls;
+        
+        if (content.classList.contains('open')) {
+            content.classList.remove('open');
+            button.classList.remove('active');
+        } else {
+            content.classList.add('open');
+            button.classList.add('active');
+        }
+    }
+    
+    applyPreset(leftFreq, rightFreq) {
+        this.elements.leftFreq.value = leftFreq;
+        this.elements.rightFreq.value = rightFreq;
+        this.updateDisplay();
+        this.updateSliderFill(this.elements.leftFreq);
+        this.updateSliderFill(this.elements.rightFreq);
+        
+        if (this.isPlaying) {
+            this.updateFrequencies();
+        }
+    }
+    
+    // Export audio functionality
+    exportAudio() {
+        this.setStatus('Generating audio...', false);
+        
+        try {
+            const duration = parseInt(this.elements.duration.value) * 60; // Convert to seconds
+            const sampleRate = 44100;
+            const length = sampleRate * duration;
+            
+            // Create offline audio context for rendering
+            const offlineContext = new OfflineAudioContext(2, length, sampleRate);
+            
+            // Create oscillators
+            const leftOsc = offlineContext.createOscillator();
+            const rightOsc = offlineContext.createOscillator();
+            
+            // Create gain nodes
+            const leftGain = offlineContext.createGain();
+            const rightGain = offlineContext.createGain();
+            
+            // Create panners
+            const leftPanner = offlineContext.createStereoPanner();
+            const rightPanner = offlineContext.createStereoPanner();
+            leftPanner.pan.value = -1;
+            rightPanner.pan.value = 1;
+            
+            // Configure oscillators
+            leftOsc.type = 'sine';
+            rightOsc.type = 'sine';
+            leftOsc.frequency.value = parseFloat(this.elements.leftFreq.value);
+            rightOsc.frequency.value = parseFloat(this.elements.rightFreq.value);
+            
+            // Set volume
+            const volume = parseFloat(this.elements.volume.value) / 100;
+            leftGain.gain.value = volume;
+            rightGain.gain.value = volume;
+            
+            // Connect nodes
+            leftOsc.connect(leftGain);
+            leftGain.connect(leftPanner);
+            leftPanner.connect(offlineContext.destination);
+            
+            rightOsc.connect(rightGain);
+            rightGain.connect(rightPanner);
+            rightPanner.connect(offlineContext.destination);
+            
+            // Start oscillators
+            leftOsc.start(0);
+            rightOsc.start(0);
+            
+            // Render audio
+            offlineContext.startRendering().then(buffer => {
+                const wav = this.audioBufferToWav(buffer);
+                const blob = new Blob([wav], { type: 'audio/wav' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `binaural_${Math.round(leftOsc.frequency.value)}-${Math.round(rightOsc.frequency.value)}_${this.elements.duration.value}min.wav`;
+                a.click();
+                
+                URL.revokeObjectURL(url);
+                
+                this.setStatus('Export successful!', false);
+                setTimeout(() => {
+                    this.setStatus(this.isPlaying ? 'Playing' : 'Ready', this.isPlaying);
+                }, 3000);
+            }).catch(error => {
+                console.error('Export error:', error);
+                this.setStatus('Export failed', false);
+            });
+            
+        } catch (error) {
+            console.error('Export error:', error);
+            this.setStatus('Export failed', false);
+        }
+    }
+    
+    // Convert AudioBuffer to WAV format
+    audioBufferToWav(buffer) {
+        const length = buffer.length * buffer.numberOfChannels * 2 + 44;
+        const arrayBuffer = new ArrayBuffer(length);
+        const view = new DataView(arrayBuffer);
+        const channels = [];
+        let offset = 0;
+        let pos = 0;
+        
+        // Helper functions
+        const setUint16 = (data) => {
+            view.setUint16(pos, data, true);
+            pos += 2;
+        };
+        
+        const setUint32 = (data) => {
+            view.setUint32(pos, data, true);
+            pos += 4;
+        };
+        
+        // Write WAV header
+        setUint32(0x46464952); // "RIFF"
+        setUint32(length - 8); // file length - 8
+        setUint32(0x45564157); // "WAVE"
+        
+        setUint32(0x20746d66); // "fmt " chunk
+        setUint32(16); // length = 16
+        setUint16(1); // PCM (uncompressed)
+        setUint16(buffer.numberOfChannels);
+        setUint32(buffer.sampleRate);
+        setUint32(buffer.sampleRate * 2 * buffer.numberOfChannels); // avg. bytes/sec
+        setUint16(buffer.numberOfChannels * 2); // block-align
+        setUint16(16); // 16-bit
+        
+        setUint32(0x61746164); // "data" chunk
+        setUint32(length - pos - 4); // chunk length
+        
+        // Write interleaved data
+        for (let i = 0; i < buffer.numberOfChannels; i++) {
+            channels.push(buffer.getChannelData(i));
+        }
+        
+        while (pos < length) {
+            for (let i = 0; i < buffer.numberOfChannels; i++) {
+                let sample = Math.max(-1, Math.min(1, channels[i][offset]));
+                sample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+                view.setInt16(pos, sample, true);
+                pos += 2;
+            }
+            offset++;
+        }
+        
+        return arrayBuffer;
     }
 }
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', init);
+// Initialize the application
+let generator;
+
+document.addEventListener('DOMContentLoaded', () => {
+    generator = new BinauralGenerator();
+});
 
 // Clean up on page unload
 window.addEventListener('beforeunload', () => {
-    if (isPlaying) {
-        stopAudio();
+    if (generator && generator.isPlaying) {
+        generator.stop();
     }
 });
-

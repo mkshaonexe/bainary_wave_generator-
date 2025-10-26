@@ -1,21 +1,44 @@
-# 🧠 Brainwave Binaural Beat Generator
+# 🧠 ADHD Focus Generator - Desktop & Web App
 
 [![Download](https://img.shields.io/badge/Download-Latest%20Release-brightgreen)](https://github.com/mkshaonexe/bainary_wave_generator-/releases/latest)
-[![Version](https://img.shields.io/badge/version-0.0.3-blue)](https://github.com/mkshaonexe/bainary_wave_generator-/releases)
-[![Platform](https://img.shields.io/badge/platform-Windows-lightgrey)](https://github.com/mkshaonexe/bainary_wave_generator-)
+[![Version](https://img.shields.io/badge/version-0.0.4-blue)](https://github.com/mkshaonexe/bainary_wave_generator-/releases)
+[![Platform](https://img.shields.io/badge/platform-Windows%20%7C%20Web-lightgrey)](https://github.com/mkshaonexe/bainary_wave_generator-)
 
-A powerful desktop application for generating scientifically-tuned binaural beats to enhance your mental state - whether you need focus, calm, or deep sleep.
+A powerful **desktop application** and **modern web app** for generating scientifically-tuned binaural beats to enhance your mental state - whether you need focus, calm, or deep sleep.
 
-## ✨ Features
+## 🌐 **NEW: Web App Available!**
+
+**🎉 Try the Web App:** Simply open `index.html` in your browser - no installation required!
+
+### ✨ **Web App Features:**
+- **🎨 Modern Dark Theme** with animated background
+- **🎵 Independent Frequency Controls** - adjust left and right ear separately
+- **🎯 Quick Presets** - ADHD Focus (850 Hz), Deep Focus, Alpha Waves, Beta Waves
+- **💾 WAV Export** with custom duration (1-120 minutes)
+- **📱 Fully Responsive** - works on desktop, tablet, and mobile
+- **🎧 Real-time Playback** with visual feedback
+
+[📖 **Complete Web App Documentation**](WEB_APP_README.md)
+
+---
+
+## 🖥️ **Desktop Application**
+
+### ✨ **Features**
 
 - **🎵 Continuous Playback**: Smooth, uninterrupted audio streaming
-- **⚡ Three Scientific Presets**: 
-  - 🧠 **Stop Overthinking / Calm Mind** (852 Hz) - Solfeggio frequency for awakening intuition
-  - 📚 **Focus / Study / Learning** (14-20 Hz Beta) - Improves attention and working memory
-  - 😴 **Deep Sleep / Healing** (1-3 Hz Delta) - Mimics slow-wave sleep, helps with insomnia
-- **💾 Export to WAV**: Save custom binaural beats for any duration
-- **🎨 Beautiful GUI**: Modern, intuitive interface
-- **🔧 Advanced Controls**: Customizable frequencies and settings
+- **⚡ ADHD Focus Preset**: 850 Hz frequency specifically for ADHD focus
+- **🔧 Advanced Controls**: Customizable left/right ear frequencies
+- **💾 Export Options**: Save as WAV or MP3 with custom duration
+- **🎨 Modern GUI**: Production-level interface with resizable window
+- **📊 Real-time Controls**: Adjust frequencies while playing
+
+### 🎯 **Presets Available**
+
+- **🧠 ADHD Focus (850 Hz)** - Specialized frequency for ADHD concentration
+- **📚 Focus / Study / Learning (15 Hz Beta)** - Improves attention and working memory  
+- **😴 Deep Sleep / Healing (2 Hz Delta)** - Mimics slow-wave sleep, helps with insomnia
+- **🧘 Stop Overthinking (852 Hz Solfeggio)** - Calm mind and reduce mental clutter
 
 ## 📥 Quick Start
 
@@ -106,7 +129,29 @@ Your brain perceives the difference (6 Hz in this example) as a rhythmic beat, w
 
 ## 📋 Changelog
 
-### v0.0.3 (Latest)
+### v0.0.4 (Latest) - MAJOR UPDATE
+
+- ✅ **🌐 NEW: Complete Web Application**
+  - Modern dark theme with animated background
+  - Independent left/right ear frequency controls (100-1000 Hz)
+  - 4 quick presets including ADHD Focus (850 Hz)
+  - WAV export with custom duration
+  - Fully responsive design for all devices
+  - Real-time binaural beat visualization
+
+- ✅ **🖥️ Enhanced Desktop Application**
+  - Resizable window with modern GUI design
+  - Always-visible MP3 export controls
+  - Production-level UI/UX improvements
+  - Enhanced playback controls with visual feedback
+  - Improved advanced settings layout
+
+- ✅ **📚 Complete Documentation**
+  - Comprehensive web app documentation
+  - Usage instructions and safety guidelines
+  - Technical specifications and browser compatibility
+
+### v0.0.3
 - ✅ **Updated to 3 scientifically-tuned presets**
 - ✅ Added Solfeggio Frequency (852 Hz) for stopping overthinking and calm mind
 - ✅ Added Beta waves (15 Hz) for focus and learning

@@ -24,6 +24,14 @@ A powerful **desktop application** and **modern web app** for generating scienti
 
 ## 🖥️ **Desktop Application**
 
+### 📥 **Download Ready-to-Use Executable**
+
+**No Python Installation Required!** Just download and run:
+
+**📦 Download:** [BinauralWaveGenerator.exe](https://github.com/mkshaonexe/bainary_wave_generator-/releases/latest) (23 MB)
+
+Double-click to run - that's it! No setup, no dependencies, no installation needed! ✨
+
 ### ✨ **Features**
 
 - **🎨 Modern Dark Interface**: Matches the web app design with dark theme
